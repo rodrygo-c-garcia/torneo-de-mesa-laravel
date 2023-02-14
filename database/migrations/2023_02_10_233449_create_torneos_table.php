@@ -24,7 +24,7 @@ return new class extends Migration
             // llave foranea, realacion de 1:N
             $table->bigInteger('modalidad_id')->unsigned();
             $table->bigInteger('categoria_id')->unsigned();
-            $table->foreign('modalida_id')->references('id')->on('modalidads');
+            $table->foreign('modalidad_id')->references('id')->on('modalidads');
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
