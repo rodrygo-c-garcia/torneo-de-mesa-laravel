@@ -47,7 +47,26 @@ class TorneoController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        //Buscamos el torneo
+        $torneo = Torneo::where('id', $id)->first();
+
+        // verificamos si existe el torneo
+        if ($torneo) {
+            $request->validate([
+                "nombre" => "required|max:50|min:3|unique:torneos,nombre,$id"
+            ]);
+
+            $torneo->nombre = $request->nombre;
+            $torneo->descripcion = $request->descripcion;
+            $torneo->sede = $request->sede;
+            $torneo->fecha_inicio = $request->fecha_inicio;
+            $torneo->fecha_final = $request->fecha_final;
+            $torneo->categoria_id = $request->categoria_id;
+            $torneo->modalidad_id = $request->modalidad_id;
+            $torneo->save();
+
+            return response()->json(['mensaje' => 'Torneo Modificado', 'data' => $torneo], 201);
+        } else return response()->json(['mensaje' => 'Torneo NO Modificado'], 404);
     }
 
     public function destroy($id)
