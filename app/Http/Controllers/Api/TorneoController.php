@@ -40,7 +40,9 @@ class TorneoController extends Controller
 
     public function show($id)
     {
-        //
+        $torneo = Torneo::find($id);
+        if ($torneo) return response()->json($torneo, 200);
+        else return response()->json(['No se encontro el Torneo'], 404);
     }
 
     public function update(Request $request, $id)
