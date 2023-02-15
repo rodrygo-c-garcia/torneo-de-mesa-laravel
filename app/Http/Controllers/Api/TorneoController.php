@@ -71,6 +71,8 @@ class TorneoController extends Controller
 
     public function destroy($id)
     {
-        //
+        $torneo = Torneo::where('id', $id)->first();
+        $torneo->delete();
+        return response()->json(['mensaje' => 'Torneo Eliminado']);
     }
 }
